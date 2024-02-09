@@ -1,7 +1,11 @@
 require('dotenv').config();
 const express = require('express');
+const { connectDB } = require('./src/config/db');
 
 const app = express();
+connectDB();
+app.use(express.json());
+
 //Error handling
 app.use('*', (req, res, next) => {
   const error = new Error('Route not found');
