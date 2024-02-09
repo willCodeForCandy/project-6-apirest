@@ -38,4 +38,19 @@ const postFood = async (req, res, next) => {
     return res.status(500).json(error);
   }
 };
-module.exports = { getFoods, getFoodById, postFood };
+//PUT
+const updateFood = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const newFood = new Food(req.body);
+    newFood._id = id;
+    const updatedFood = await Food.findByIdAndUpdate(id, newFood, {
+      new: true
+    });
+    return res.status(200).json(updatedFood);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+module.exports = { getFoods, getFoodById, postFood, updateFood };
