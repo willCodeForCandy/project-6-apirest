@@ -52,5 +52,15 @@ const updateFood = async (req, res, next) => {
     return res.status(500).json(error);
   }
 };
+//DELETE
+const deleteFood = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedFood = await Food.findByIdAndDelete(id);
+    return res.status(200).json(deletedFood);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
-module.exports = { getFoods, getFoodById, postFood, updateFood };
+module.exports = { getFoods, getFoodById, postFood, updateFood, deleteFood };
